@@ -18,6 +18,11 @@
             100% { text-shadow: 1px 0 #D4A576, -1px 0 #F5F5F5; }
         }
 
+        @keyframes pulse {
+            0%, 100% { text-shadow: 0 0 3px #B89B72; }
+            50% { text-shadow: 0 0 5px #B89B72, 0 0 8px #8B0000; }
+        }
+
         @keyframes twinkle {
             0%, 100% { opacity: 0.2; }
             50% { opacity: 1; }
@@ -29,10 +34,10 @@
             font-family: 'Futura', sans-serif; /* Clean, cinematic font */
             margin: 0;
             padding: 0;
-            padding-bottom: 60px; /* Increased for footer clearance */
+            padding-bottom: 60px; /* Space for fixed footer */
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             min-height: 100vh;
             text-align: center;
@@ -65,7 +70,7 @@
             background: linear-gradient(145deg, rgba(28, 37, 38, 0.9), rgba(0, 0, 0, 0.95)); /* Frosted glass, moody */
             padding: 15px 10px; /* Minimal padding */
             border-radius: 4px; /* Subtle corners */
-            max-width: 75%; /* Tight focus */
+            max-width: 80%; /* Tight focus */
             width: 550px; /* Slim container */
             box-shadow: 0 0 10px rgba(212, 165, 118, 0.3); /* Subtle gold shadow */
             animation: fadeIn 0.7s ease-out; /* Smooth, cinematic fade */
@@ -74,7 +79,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            margin: 10px 0 20px; /* Added margin-bottom for spacing */
+            margin: 10px 0 20px; /* Spacing for footer */
             backdrop-filter: blur(6px); /* Soft glass effect */
             border: 1px solid rgba(245, 245, 245, 0.2); /* Vintage frame */
             position: relative; /* Above background */
@@ -87,8 +92,8 @@
             letter-spacing: 0.05em; /* Slight spacing for elegance */
             margin-bottom: 12px;
             color: #D4A576; /* Regal gold for ERA */
-            text-shadow: 0 0 3px #F5F5F5; /* Subtle off-white glow */
-            animation: fadeIn 0.8s ease-out 0.2s forwards, glitch 2s infinite alternate;
+            text-shadow: 0 0 3px #F5F5F5; /* Subtle off-white base glow */
+            animation: fadeIn 0.8s ease-out 0.2s forwards, glitch 2s infinite alternate, pulse 3s infinite ease-in-out; /* Add glowing pulse */
             opacity: 0;
             text-transform: uppercase; /* Capitalized ERA */
         }
@@ -104,7 +109,7 @@
         }
 
         img {
-            max-width: clamp(30vw, 300px, 50vw); /* Smaller, viewport-scaled */
+            max-width: clamp(25vw, 250px, 45vw); /* Viewport-scaled, smaller */
             height: auto;
             object-fit: contain;
             border: 1px solid #D4A576; /* Gold-toned frame */
@@ -117,14 +122,14 @@
         img:hover {
             transform: scale(1.02); /* Subtle zoom */
             box-shadow: 0 0 10px rgba(212, 165, 118, 0.5); /* Gold vignette shadow */
-            filter: brightness(1.15) contrast(1.1) saturate(0.9); /* Moody A24 effect */
+            filter: brightness(1.15) contrast(1.1) saturate(0.9); /* Moody effect */
         }
 
         .contact-info {
             font-size: clamp(0.7em, 1.4vw, 0.9em); /* Sleek, minimal */
             font-weight: 400;
             margin-top: 12px;
-            margin-bottom: 20px; /* Ensure spacing above footer */
+            margin-bottom: 20px; /* Ensure no cutoff */
             animation: fadeIn 0.8s ease-out 0.6s forwards;
             opacity: 0;
         }
@@ -168,11 +173,15 @@
             }
 
             img {
-                max-width: clamp(25vw, 250px, 45vw); /* Smaller for mobile */
+                max-width: clamp(20vw, 200px, 40vw); /* Smaller for mobile */
             }
 
             .contact-info {
                 margin-bottom: 30px; /* Extra space for small screens */
+            }
+
+            h1 {
+                font-size: clamp(1.4em, 3.5vw, 2.4em); /* Smaller for mobile */
             }
         }
     </style>

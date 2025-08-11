@@ -29,7 +29,7 @@
             font-family: 'Futura', sans-serif; /* Clean, cinematic font */
             margin: 0;
             padding: 0;
-            padding-bottom: 40px; /* Space for fixed footer */
+            padding-bottom: 60px; /* Increased for footer clearance */
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -74,7 +74,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            margin: 10px 0;
+            margin: 10px 0 20px; /* Added margin-bottom for spacing */
             backdrop-filter: blur(6px); /* Soft glass effect */
             border: 1px solid rgba(245, 245, 245, 0.2); /* Vintage frame */
             position: relative; /* Above background */
@@ -104,7 +104,7 @@
         }
 
         img {
-            max-width: clamp(40vw, 400px, 60vw); /* Scales with viewport, 20% smaller contextually */
+            max-width: clamp(30vw, 300px, 50vw); /* Smaller, viewport-scaled */
             height: auto;
             object-fit: contain;
             border: 1px solid #D4A576; /* Gold-toned frame */
@@ -124,6 +124,7 @@
             font-size: clamp(0.7em, 1.4vw, 0.9em); /* Sleek, minimal */
             font-weight: 400;
             margin-top: 12px;
+            margin-bottom: 20px; /* Ensure spacing above footer */
             animation: fadeIn 0.8s ease-out 0.6s forwards;
             opacity: 0;
         }
@@ -156,6 +157,23 @@
 
         footer p {
             margin: 0;
+        }
+
+        /* Media query for smaller screens */
+        @media (max-width: 600px) {
+            .content-wrapper {
+                max-width: 90%; /* Wider for small screens */
+                width: 100%;
+                padding: 10px 5px; /* Reduced padding */
+            }
+
+            img {
+                max-width: clamp(25vw, 250px, 45vw); /* Smaller for mobile */
+            }
+
+            .contact-info {
+                margin-bottom: 30px; /* Extra space for small screens */
+            }
         }
     </style>
 </head>

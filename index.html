@@ -18,8 +18,13 @@
             100% { text-shadow: 1px 0 #D4A576, -1px 0 #F5F5F5; }
         }
 
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+
         body {
-            background-color: #1C2526; /* Deep charcoal for A24 mood */
+            background-color: #000; /* Deep black void for space */
             color: #F5F5F5; /* Warm off-white for classic elegance */
             font-family: 'Futura', sans-serif; /* Clean, cinematic font */
             margin: 0;
@@ -31,6 +36,28 @@
             min-height: 100vh;
             text-align: center;
             overflow-x: hidden;
+            position: relative; /* For layered background */
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 50% 50%, rgba(28, 37, 38, 0.3) 0%, rgba(0, 0, 0, 0.8) 100%), /* Nebula-like glow */
+                url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"%3E%3Ccircle cx="10" cy="10" r="1" fill="%23F5F5F5" opacity="0.5"/%3E%3Ccircle cx="30" cy="70" r="0.5" fill="%23F5F5F5" opacity="0.3"/%3E%3Ccircle cx="50" cy="20" r="1.5" fill="%23D4A576" opacity="0.4"/%3E%3Ccircle cx="80" cy="50" r="0.8" fill="%23F5F5F5" opacity="0.6"/%3E%3Ccircle cx="90" cy="90" r="1" fill="%23D4A576" opacity="0.2"/%3E%3C/svg%3E') repeat; /* Starfield pattern */
+            background-size: 200px 200px; /* Tile size for stars */
+            animation: twinkle 5s infinite alternate ease-in-out, moveSpace 60s linear infinite; /* Twinkle + slow drift for depth */
+            z-index: -1; /* Behind content */
+            opacity: 0.8; /* Subtle integration */
+        }
+
+        @keyframes moveSpace {
+            0% { background-position: 0 0; }
+            100% { background-position: -200px -200px; } /* Slow parallax drift */
         }
 
         .content-wrapper {
@@ -49,6 +76,8 @@
             margin: 10px 0;
             backdrop-filter: blur(6px); /* Soft glass effect */
             border: 1px solid rgba(245, 245, 245, 0.2); /* Vintage frame */
+            position: relative; /* Ensure content sits above background */
+            z-index: 1;
         }
 
         h1 {
@@ -111,7 +140,7 @@
 
         footer {
             padding: 5px; /* Ultra-minimal */
-            background-color: #1C2526; /* Matches body */
+            background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent to blend with space */
             width: 100%;
             text-align: center;
             font-family: 'Times New Roman', serif; /* Classic serif */
@@ -119,6 +148,8 @@
             color: #A9A9A9; /* Soft grey */
             flex-shrink: 0;
             border-top: 1px solid rgba(245, 245, 245, 0.1); /* Faint vintage line */
+            position: relative;
+            z-index: 1;
         }
 
         footer p {

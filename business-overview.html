@@ -23,180 +23,204 @@
             50% { text-shadow: 0 0 5px #B89B72, 0 0 8px #8B0000; }
         }
 
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.2; }
-            50% { opacity: 1; }
+        @keyframes trailFade {
+            0% { opacity: 0; }
+            100% { opacity: 0.5; }
         }
 
         body {
-            background-color: #000; /* Deep black void for space */
-            color: #F5F5F5; /* Warm off-white for classic elegance */
-            font-family: 'Futura', sans-serif; /* Clean, cinematic font */
             margin: 0;
             padding: 0;
-            padding-bottom: 60px; /* Space for fixed footer */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            text-align: center;
+            padding-bottom: 60px;
+            background: #000;
+            color: #F5F5F5;
+            font-family: 'Futura', sans-serif;
             overflow-x: hidden;
-            position: relative; /* For layered background */
+            position: relative;
         }
 
-        body::before {
-            content: '';
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero canvas {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
-                radial-gradient(circle at 50% 50%, rgba(28, 37, 38, 0.3) 0%, rgba(0, 0, 0, 0.8) 100%), /* Nebula-like glow */
-                url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"%3E%3Ccircle cx="10" cy="10" r="1" fill="%23F5F5F5" opacity="0.5"/%3E%3Ccircle cx="30" cy="70" r="0.5" fill="%23F5F5F5" opacity="0.3"/%3E%3Ccircle cx="50" cy="20" r="1.5" fill="%23D4A576" opacity="0.4"/%3E%3Ccircle cx="80" cy="50" r="0.8" fill="%23F5F5F5" opacity="0.6"/%3E%3Ccircle cx="90" cy="90" r="1" fill="%23D4A576" opacity="0.2"/%3E%3C/svg%3E') repeat; /* Starfield pattern */
-            background-size: 200px 200px; /* Tile size for stars */
-            animation: twinkle 5s infinite alternate ease-in-out, moveSpace 60s linear infinite; /* Twinkle + slow drift */
-            z-index: -1; /* Behind content */
-            opacity: 0.8; /* Subtle integration */
-        }
-
-        @keyframes moveSpace {
-            0% { background-position: 0 0; }
-            100% { background-position: -200px -200px; } /* Slow parallax drift */
+            z-index: 1;
+            will-change: transform;
         }
 
         .content-wrapper {
-            background: linear-gradient(145deg, rgba(28, 37, 38, 0.9), rgba(0, 0, 0, 0.95)); /* Frosted glass, moody */
-            padding: 15px 10px; /* Minimal padding */
-            border-radius: 4px; /* Subtle corners */
-            max-width: 80%; /* Tight focus */
-            width: 600px; /* Slightly wider for content */
-            box-shadow: 0 0 10px rgba(212, 165, 118, 0.3); /* Subtle gold shadow */
-            animation: fadeIn 0.7s ease-out; /* Smooth, cinematic fade */
-            flex-grow: 1;
+            position: relative;
+            z-index: 2;
+            background: linear-gradient(145deg, rgba(28, 37, 38, 0.9), rgba(0, 0, 0, 0.95));
+            padding: 15px 10px;
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(212, 165, 118, 0.3);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(245, 245, 245, 0.2);
+            max-width: 90%;
+            width: 600px;
+            animation: fadeIn 0.7s ease-out;
+            margin: 0 auto;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            margin: 10px 0 20px; /* Spacing for footer */
-            backdrop-filter: blur(6px); /* Soft glass effect */
-            border: 1px solid rgba(245, 245, 245, 0.2); /* Vintage frame */
-            position: relative; /* Above background */
-            z-index: 1;
         }
 
-        h1 {
-            font-size: clamp(1.8em, 4.5vw, 3em); /* Bold, cinematic */
+        .hero h1 {
+            font-size: clamp(1.4em, 3.5vw, 2.4em); /* Smaller logo */
             font-weight: 700;
-            letter-spacing: 0.05em; /* Slight spacing for elegance */
+            letter-spacing: 0.05em;
             margin-bottom: 12px;
-            color: #D4A576; /* Regal gold for ERA */
-            text-shadow: 0 0 3px #F5F5F5; /* Subtle off-white base glow */
-            animation: fadeIn 0.8s ease-out 0.2s forwards, glitch 2s infinite alternate, pulse 3s infinite ease-in-out; /* Add glowing pulse */
+            color: #D4A576;
+            text-shadow: 0 0 3px #F5F5F5;
+            animation: fadeIn 0.8s ease-out 0.2s forwards, glitch 2s infinite alternate, pulse 3s infinite ease-in-out;
             opacity: 0;
-            text-transform: uppercase; /* Capitalized ERA */
+            text-transform: uppercase;
+        }
+
+        .hero img {
+            max-width: clamp(25vw, 250px, 45vw);
+            height: auto;
+            object-fit: contain;
+            border: 1px solid #D4A576;
+            border-radius: 3px;
+            margin-top: 12px;
+            filter: brightness(1.1) contrast(1.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+        }
+
+        .hero img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 10px rgba(212, 165, 118, 0.5);
+            filter: brightness(1.15) contrast(1.1) saturate(0.9);
         }
 
         h2 {
-            font-size: clamp(1.2em, 2.5vw, 1.8em); /* Smaller, bold */
+            font-size: clamp(1.2em, 2.5vw, 1.8em);
             font-weight: 700;
-            color: #D4A576; /* Regal gold */
+            color: #D4A576;
             margin-bottom: 10px;
             animation: fadeIn 0.8s ease-out 0.4s forwards;
             opacity: 0;
+            text-align: center;
         }
 
-        p {
-            font-size: clamp(0.8em, 1.5vw, 1em); /* Compact, readable */
+        .content-wrapper p {
+            font-size: clamp(0.8em, 1.5vw, 1em);
             font-weight: 400;
             line-height: 1.4;
-            color: #D3D3D3; /* Soft grey */
+            color: #D3D3D3;
             margin-bottom: 10px;
             animation: fadeIn 0.8s ease-out 0.6s forwards;
             opacity: 0;
-            text-align: left;
+            text-align: center;
             max-width: 90%;
         }
 
-        .back-link {
-            font-size: clamp(0.7em, 1.4vw, 0.9em); /* Matches contact-info */
+        .nav-links {
+            font-size: clamp(0.7em, 1.4vw, 0.9em);
             font-weight: 400;
+            text-align: center;
             margin-top: 10px;
-            margin-bottom: 20px; /* Ensure no cutoff */
+            margin-bottom: 20px;
             animation: fadeIn 0.8s ease-out 0.8s forwards;
             opacity: 0;
         }
 
-        .back-link a {
-            color: #D4A576; /* Gold for elegance */
+        .nav-links a {
+            color: #D4A576;
             text-decoration: none;
+            margin: 0 10px;
             transition: color 0.2s ease;
         }
 
-        .back-link a:hover {
-            color: #F5F5F5; /* Off-white on hover */
+        .nav-links a:hover {
+            color: #F5F5F5;
             text-decoration: underline;
         }
 
         footer {
-            position: fixed; /* Sticky footer */
+            position: fixed;
             bottom: 0;
             left: 0;
-            padding: 5px; /* Ultra-minimal */
-            background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent to blend with space */
+            padding: 5px;
+            background-color: rgba(0, 0, 0, 0.8);
             width: 100%;
             text-align: center;
-            font-family: 'Times New Roman', serif; /* Classic serif */
-            font-size: 0.75em; /* Subtle */
-            color: #A9A9A9; /* Soft grey */
-            border-top: 1px solid rgba(245, 245, 245, 0.1); /* Faint vintage line */
-            z-index: 2; /* Above background */
+            font-family: 'Times New Roman', serif;
+            font-size: 0.75em;
+            color: #A9A9A9;
+            border-top: 1px solid rgba(245, 245, 245, 0.1);
+            z-index: 2;
         }
 
         footer p {
             margin: 0;
         }
 
-        /* Media query for smaller screens */
         @media (max-width: 600px) {
             .content-wrapper {
-                max-width: 90%; /* Wider for small screens */
+                max-width: 90%;
                 width: 100%;
-                padding: 10px 5px; /* Reduced padding */
+                padding: 10px 5px;
             }
 
-            h1 {
-                font-size: clamp(1.4em, 3.5vw, 2.4em); /* Smaller for mobile */
+            .hero h1 {
+                font-size: clamp(1.2em, 3vw, 2em);
+            }
+
+            .hero img {
+                max-width: clamp(20vw, 200px, 40vw);
             }
 
             h2 {
-                font-size: clamp(1em, 2vw, 1.4em); /* Smaller for mobile */
+                font-size: clamp(1em, 2vw, 1.4em);
             }
 
-            p {
-                font-size: clamp(0.7em, 1.3vw, 0.9em); /* Smaller for mobile */
-            }
-
-            .back-link {
-                margin-bottom: 30px; /* Extra space for small screens */
+            .content-wrapper p {
+                font-size: clamp(0.7em, 1.3vw, 0.9em);
             }
         }
     </style>
 </head>
 <body>
-    <div class="content-wrapper">
-        <h1>ERA Business Offering</h1>
+    <section class="hero">
+        <canvas id="starCanvas"></canvas>
+        <div class="content-wrapper">
+            <h1>ERA</h1>
+            <a href="https://www.youtube.com/c/eracinema">
+                <img src="your-content-image.jpg" alt="ERA">
+            </a>
+            <p class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="business-overview.html">Business Overview</a>
+                <a href="team.html">Team</a>
+            </p>
+        </div>
+    </section>
+    <section class="content-wrapper">
         <h2>Vision & Mission</h2>
-        <p>Founded in 2019, Era is a global independent film studio focused on producing high-quality, commercially successful films that captivate audiences worldwide. Our mission is to deliver innovative, compelling entertainment through creative storytelling and cutting-edge technology, positioning Era as a leader in the evolving film industry.</p>
+        <p>Founded in 2019, ERA is a global independent film studio focused on producing high-quality, commercially successful films that captivate audiences worldwide. Our mission is to deliver innovative, compelling entertainment through creative storytelling and cutting-edge technology, positioning ERA as a leader in the evolving film industry.</p>
         <h2>Global Strategy</h2>
-        <p>Era operates as a vertically integrated studio, controlling development, production, and distribution to maximize efficiency and creative output. We produce 3–5 films annually, each designed to appeal to global markets through bold narratives and top-tier talent. Our international network of creators and investors, including a UAE-based investment table, ensures a steady pipeline of projects and capital.</p>
+        <p>ERA operates as a vertically integrated studio, controlling development, production, and distribution to maximize efficiency and creative output. We produce 3–5 films annually, each designed to appeal to global markets through bold narratives and top-tier talent. Our international network of creators and investors, including a UAE-based investment table, ensures a steady pipeline of projects and capital.</p>
         <h2>Sustainability Initiatives</h2>
-        <p>Era adopts cost-effective, future-proof production methods to stay competitive. We use energy-efficient equipment, streamline logistics, and prioritize digital distribution to minimize costs and environmental impact. These practices enhance profitability while aligning with industry trends toward sustainable operations.</p>
+        <p>ERA adopts cost-effective, future-proof production methods to stay competitive. We use energy-efficient equipment, streamline logistics, and prioritize digital distribution to minimize costs and environmental impact. These practices enhance profitability while aligning with industry trends toward sustainable operations.</p>
         <h2>Talent Acquisition</h2>
-        <p>Era collaborates with a diverse range of top-tier actors, directors, and writers to create films that resonate with global audiences. Our talent strategy focuses on securing experienced professionals and emerging creators to deliver fresh, marketable stories that drive commercial success.</p>
+        <p>ERA collaborates with a diverse range of top-tier actors, directors, and writers to create films that resonate with global audiences. Our talent strategy focuses on securing experienced professionals and emerging creators to deliver fresh, marketable stories that drive commercial success.</p>
         <h2>Technological Innovation</h2>
-        <p>Era leverages advanced technology to enhance production and audience engagement. AI optimizes script development and production workflows, reducing costs. VR technology creates immersive viewer experiences, while blockchain ensures secure, transparent management of intellectual property and royalties, protecting profits and creator rights.</p>
+        <p>ERA leverages advanced technology to enhance production and audience engagement. AI optimizes script development and production workflows, reducing costs. VR technology creates immersive viewer experiences, while blockchain ensures secure, transparent management of intellectual property and royalties, protecting profits and creator rights.</p>
         <h2>Revenue Streams</h2>
         <p>
             - <strong>Theatrical Releases</strong>: Targeting $10M–$30M per film in global box office, with 2–3 releases annually.<br>
@@ -207,14 +231,111 @@
             Projected revenue grows from $27M in Year 1 to $100M by Year 5.
         </p>
         <h2>Investment Opportunities</h2>
-        <p>Era’s exceptional talent, including award-winning actors, directors, and writers, unlocks access to substantial financing from our global investment network. Their proven track record and ability to deliver compelling, marketable films attract high-value investors, ensuring robust funding for premium cinematic projects. Era offers attractive investment options through equity and profit-sharing, supported by a global network including a UAE-based table. With a projected 15–20% ROI over five years, investors benefit from a diversified portfolio of films and IP ventures, backed by transparent financial tracking via blockchain technology.</p>
+        <p>ERA’s exceptional talent, including award-winning actors, directors, and writers, unlocks access to substantial financing from our global investment network. Their proven track record and ability to deliver compelling, marketable films attract high-value investors, ensuring robust funding for premium cinematic projects. ERA offers attractive investment options through equity and profit-sharing, supported by a global network including a UAE-based table. With a projected 15–20% ROI over five years, investors benefit from a diversified portfolio of films and IP ventures, backed by transparent financial tracking via blockchain technology.</p>
         <h2>Strategic Partnerships</h2>
-        <p>Era partners with leading streaming platforms and technology firms to expand market reach and integrate innovative tools. Collaborations with industry leaders ensure our films achieve maximum visibility and profitability, while tech partnerships drive advancements in production and distribution.</p>
-        <p class="back-link"><a href="index.html">Back to Home</a></p>
-    </div>
-
+        <p>ERA partners with leading streaming platforms and technology firms to expand market reach and integrate innovative tools. Collaborations with industry leaders ensure our films achieve maximum visibility and profitability, while tech partnerships drive advancements in production and distribution.</p>
+    </section>
     <footer>
         <p>&copy; 2025 ERA. All Rights Reserved. Est. 2019</p>
     </footer>
+    <script>
+        const canvas = document.getElementById('starCanvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const stars = [];
+        const numStars = 20;
+
+        function clamp(value, min, max) {
+            return Math.min(Math.max(value, min), max);
+        }
+
+        class Star {
+            constructor() {
+                this.centerX = Math.random() * canvas.width; // Random center across canvas
+                this.centerY = Math.random() * canvas.height; // Random center across canvas
+                this.radius = clamp(50, 20 * (window.innerWidth / 100), 400); // Varied radii
+                this.size = Math.random() * 2.5 + 0.5; // 0.5px to 3px for depth
+                this.angularSpeed = Math.random() * 0.0005 + 0.0001; // Slower rotation
+                this.angle = Math.random() * Math.PI * 2;
+                this.opacity = 0;
+                this.fadeInStart = performance.now();
+                this.trailPoints = []; // Store fixed trail positions
+            }
+
+            update() {
+                this.angle += this.angularSpeed;
+                this.x = this.centerX + this.radius * Math.cos(this.angle);
+                this.y = this.centerY + this.radius * Math.sin(this.angle);
+
+                // Add new trail point
+                this.trailPoints.push({ x: this.x, y: this.y });
+
+                // Cap at 3600 to prevent performance issues
+                if (this.trailPoints.length > 3600) {
+                    this.trailPoints.shift();
+                }
+
+                const timeElapsed = (performance.now() - this.fadeInStart) / 2000;
+                this.opacity = Math.min(timeElapsed, this.size > 2 ? 0.6 : 0.4); // Brighter for larger stars
+            }
+
+            draw() {
+                ctx.beginPath();
+                if (this.trailPoints.length > 0) {
+                    ctx.moveTo(this.trailPoints[0].x, this.trailPoints[0].y);
+                    for (let i = 1; i < this.trailPoints.length; i++) {
+                        const point = this.trailPoints[i];
+                        const opacity = this.opacity * (1 - i / this.trailPoints.length);
+                        const gradient = ctx.createLinearGradient(this.x, this.y, point.x, point.y);
+                        gradient.addColorStop(0, `rgba(245, 245, 245, ${opacity})`);
+                        gradient.addColorStop(1, 'rgba(245, 245, 245, 0)');
+                        ctx.strokeStyle = gradient;
+                        ctx.lineWidth = this.size * 1.5; // Thicker trails for larger stars
+                        ctx.lineTo(point.x, point.y);
+                        ctx.stroke();
+                        ctx.beginPath();
+                        ctx.moveTo(point.x, point.y);
+                    }
+                }
+            }
+        }
+
+        for (let i = 0; i < numStars; i++) {
+            stars.push(new Star());
+        }
+
+        // Central North Star
+        function drawNorthStar() {
+            ctx.beginPath();
+            ctx.arc(canvas.width / 2, canvas.height / 2, 4, 0, Math.PI * 2);
+            ctx.fillStyle = '#F5F5F5';
+            ctx.fill();
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawNorthStar();
+            stars.forEach(star => {
+                star.update();
+                star.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            stars.forEach(star => {
+                star.centerX = Math.random() * canvas.width; // Reassign random center
+                star.centerY = Math.random() * canvas.height;
+                star.radius = clamp(50, 20 * (window.innerWidth / 100), 400);
+            });
+        });
+    </script>
 </body>
 </html>

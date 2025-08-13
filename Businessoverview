@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERA - Business Overview</title>
+    <link href="https://fonts.googleapis.com/css2?family=Futura:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Keyframes for animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes glitch {
+            0% { text-shadow: 1px 0 #D4A576, -1px 0 #F5F5F5; }
+            50% { text-shadow: -1px 0 #D4A576, 1px 0 #F5F5F5; }
+            100% { text-shadow: 1px 0 #D4A576, -1px 0 #F5F5F5; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { text-shadow: 0 0 3px #B89B72; }
+            50% { text-shadow: 0 0 5px #B89B72, 0 0 8px #8B0000; }
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+
+        body {
+            background-color: #000; /* Deep black void for space */
+            color: #F5F5F5; /* Warm off-white for classic elegance */
+            font-family: 'Futura', sans-serif; /* Clean, cinematic font */
+            margin: 0;
+            padding: 0;
+            padding-bottom: 60px; /* Space for fixed footer */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            overflow-x: hidden;
+            position: relative; /* For layered background */
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 50% 50%, rgba(28, 37, 38, 0.3) 0%, rgba(0, 0, 0, 0.8) 100%), /* Nebula-like glow */
+                url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"%3E%3Ccircle cx="10" cy="10" r="1" fill="%23F5F5F5" opacity="0.5"/%3E%3Ccircle cx="30" cy="70" r="0.5" fill="%23F5F5F5" opacity="0.3"/%3E%3Ccircle cx="50" cy="20" r="1.5" fill="%23D4A576" opacity="0.4"/%3E%3Ccircle cx="80" cy="50" r="0.8" fill="%23F5F5F5" opacity="0.6"/%3E%3Ccircle cx="90" cy="90" r="1" fill="%23D4A576" opacity="0.2"/%3E%3C/svg%3E') repeat; /* Starfield pattern */
+            background-size: 200px 200px; /* Tile size for stars */
+            animation: twinkle 5s infinite alternate ease-in-out, moveSpace 60s linear infinite; /* Twinkle + slow drift */
+            z-index: -1; /* Behind content */
+            opacity: 0.8; /* Subtle integration */
+        }
+
+        @keyframes moveSpace {
+            0% { background-position: 0 0; }
+            100% { background-position: -200px -200px; } /* Slow parallax drift */
+        }
+
+        .content-wrapper {
+            background: linear-gradient(145deg, rgba(28, 37, 38, 0.9), rgba(0, 0, 0, 0.95)); /* Frosted glass, moody */
+            padding: 15px 10px; /* Minimal padding */
+            border-radius: 4px; /* Subtle corners */
+            max-width: 80%; /* Tight focus */
+            width: 600px; /* Slightly wider for content */
+            box-shadow: 0 0 10px rgba(212, 165, 118, 0.3); /* Subtle gold shadow */
+            animation: fadeIn 0.7s ease-out; /* Smooth, cinematic fade */
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 10px 0 20px; /* Spacing for footer */
+            backdrop-filter: blur(6px); /* Soft glass effect */
+            border: 1px solid rgba(245, 245, 245, 0.2); /* Vintage frame */
+            position: relative; /* Above background */
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: clamp(1.8em, 4.5vw, 3em); /* Bold, cinematic */
+            font-weight: 700;
+            letter-spacing: 0.05em; /* Slight spacing for elegance */
+            margin-bottom: 12px;
+            color: #D4A576; /* Regal gold for ERA */
+            text-shadow: 0 0 3px #F5F5F5; /* Subtle off-white base glow */
+            animation: fadeIn 0.8s ease-out 0.2s forwards, glitch 2s infinite alternate, pulse 3s infinite ease-in-out; /* Add glowing pulse */
+            opacity: 0;
+            text-transform: uppercase; /* Capitalized ERA */
+        }
+
+        h2 {
+            font-size: clamp(1.2em, 2.5vw, 1.8em); /* Smaller, bold */
+            font-weight: 700;
+            color: #D4A576; /* Regal gold */
+            margin-bottom: 10px;
+            animation: fadeIn 0.8s ease-out 0.4s forwards;
+            opacity: 0;
+        }
+
+        p {
+            font-size: clamp(0.8em, 1.5vw, 1em); /* Compact, readable */
+            font-weight: 400;
+            line-height: 1.4;
+            color: #D3D3D3; /* Soft grey */
+            margin-bottom: 10px;
+            animation: fadeIn 0.8s ease-out 0.6s forwards;
+            opacity: 0;
+            text-align: left;
+            max-width: 90%;
+        }
+
+        .back-link {
+            font-size: clamp(0.7em, 1.4vw, 0.9em); /* Matches contact-info */
+            font-weight: 400;
+            margin-top: 10px;
+            margin-bottom: 20px; /* Ensure no cutoff */
+            animation: fadeIn 0.8s ease-out 0.8s forwards;
+            opacity: 0;
+        }
+
+        .back-link a {
+            color: #D4A576; /* Gold for elegance */
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .back-link a:hover {
+            color: #F5F5F5; /* Off-white on hover */
+            text-decoration: underline;
+        }
+
+        footer {
+            position: fixed; /* Sticky footer */
+            bottom: 0;
+            left: 0;
+            padding: 5px; /* Ultra-minimal */
+            background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent to blend with space */
+            width: 100%;
+            text-align: center;
+            font-family: 'Times New Roman', serif; /* Classic serif */
+            font-size: 0.75em; /* Subtle */
+            color: #A9A9A9; /* Soft grey */
+            border-top: 1px solid rgba(245, 245, 245, 0.1); /* Faint vintage line */
+            z-index: 2; /* Above background */
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        /* Media query for smaller screens */
+        @media (max-width: 600px) {
+            .content-wrapper {
+                max-width: 90%; /* Wider for small screens */
+                width: 100%;
+                padding: 10px 5px; /* Reduced padding */
+            }
+
+            h1 {
+                font-size: clamp(1.4em, 3.5vw, 2.4em); /* Smaller for mobile */
+            }
+
+            h2 {
+                font-size: clamp(1em, 2vw, 1.4em); /* Smaller for mobile */
+            }
+
+            p {
+                font-size: clamp(0.7em, 1.3vw, 0.9em); /* Smaller for mobile */
+            }
+
+            .back-link {
+                margin-bottom: 30px; /* Extra space for small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content-wrapper">
+        <h1>ERA Business Offering</h1>
+        <h2>Vision & Mission</h2>
+        <p>Established in 2019, Era is a global independent film studio committed to redefining entertainment through bold, authentic, and culture-defining storytelling. Our vision is to lead a new era of cinema that amplifies diverse voices, embraces cutting-edge technology, and prioritizes sustainability and integrity. We aim to create films that resonate globally while fostering an inclusive and innovative creative ecosystem.</p>
+        <h2>Global Strategy</h2>
+        <p>Era operates as a vertically integrated studio, overseeing development, production, and distribution to maintain creative control and efficiency. We produce 3–5 high-quality films annually, focusing on narratives that challenge conventions and reflect global perspectives. Our global talent network includes award-winning actors, directors, and writers, supported by a robust investment framework with partners in key markets, including a UAE-based investment table.</p>
+        <h2>Sustainability Initiatives</h2>
+        <p>Era is dedicated to eco-conscious filmmaking. We implement carbon-neutral production sets, utilize renewable energy sources where feasible, and prioritize digital distribution to reduce environmental impact. Our goal is to set an industry standard for sustainable practices while maintaining artistic excellence, with a commitment to reducing our carbon footprint by 50% by 2030.</p>
+        <h2>Inclusivity & Diversity</h2>
+        <p>Inclusivity is at the core of Era’s ethos. We ensure 70% of our projects feature underrepresented voices, including women, BIPOC, and LGBTQ+ creators. Our in-house talent roster fosters diversity across all roles, from writers to cinematographers, creating authentic stories that resonate with global audiences. We also partner with cultural organizations to support emerging filmmakers from marginalized communities.</p>
+        <h2>Technological Innovation</h2>
+        <p>Era pioneers the integration of technology in filmmaking. We use AI for script analysis and production optimization, ensuring efficiency without compromising creativity. Our VR initiatives create immersive storytelling experiences, while blockchain technology ensures transparent IP management and royalty distribution, empowering creators and protecting their work.</p>
+        <h2>Revenue Streams</h2>
+        <p>
+            - <strong>Theatrical Releases</strong>: Targeting $10M–$30M per film in global box office, with 2–3 releases annually.<br>
+            - <strong>Streaming & VOD</strong>: Partnerships with major platforms, projecting $15M–$40M yearly.<br>
+            - <strong>International Sales</strong>: Licensing to global markets, contributing $8M–$20M annually.<br>
+            - <strong>Merchandising & IP</strong>: Expanding IPs into books, games, and merchandise, generating $2M–$10M.<br>
+            - <strong>Grants & Sponsorships</strong>: Securing $2M–$5M from cultural and private funding.<br>
+            Projected revenue grows from $27M in Year 1 to $100M by Year 5.
+        </p>
+        <h2>Investment Opportunities</h2>
+        <p>Era offers equity and profit-sharing opportunities through a global investment network, including a UAE-based table. Our model emphasizes ethical practices, sustainable growth, and high returns, with a projected 15–20% ROI over five years. Investors gain access to a portfolio of innovative films and IP-driven ventures, supported by transparent financial reporting via blockchain.</p>
+        <h2>Strategic Partnerships</h2>
+        <p>Era collaborates with leading streaming platforms, cultural institutions, and technology innovators to amplify our reach and impact. Partnerships with organizations like Sundance Institute and tech firms specializing in AI and VR enhance our ability to deliver groundbreaking content while fostering industry-wide innovation.</p>
+        <p class="back-link"><a href="index.html">Back to Home</a></p>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 ERA. All Rights Reserved. Est. 2019</p>
+    </footer>
+</body>
+</html>

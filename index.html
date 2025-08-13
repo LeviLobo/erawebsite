@@ -129,18 +129,27 @@
             font-size: clamp(0.7em, 1.4vw, 0.9em); /* Sleek, minimal */
             font-weight: 400;
             margin-top: 12px;
-            margin-bottom: 20px; /* Ensure no cutoff */
+            margin-bottom: 10px; /* Adjusted for new link */
             animation: fadeIn 0.8s ease-out 0.6s forwards;
             opacity: 0;
         }
 
-        .contact-info a {
+        .business-link {
+            font-size: clamp(0.7em, 1.4vw, 0.9em); /* Matches contact-info */
+            font-weight: 400;
+            margin-top: 10px;
+            margin-bottom: 20px; /* Ensure no cutoff */
+            animation: fadeIn 0.8s ease-out 0.8s forwards;
+            opacity: 0;
+        }
+
+        .contact-info a, .business-link a {
             color: #D4A576; /* Gold for elegance */
             text-decoration: none;
             transition: color 0.2s ease;
         }
 
-        .contact-info a:hover {
+        .contact-info a:hover, .business-link a:hover {
             color: #F5F5F5; /* Off-white on hover */
             text-decoration: underline;
         }
@@ -176,7 +185,7 @@
                 max-width: clamp(20vw, 200px, 40vw); /* Smaller for mobile */
             }
 
-            .contact-info {
+            .contact-info, .business-link {
                 margin-bottom: 30px; /* Extra space for small screens */
             }
 
@@ -194,6 +203,7 @@
             <img src="your-content-image.jpg" alt="ERA">
         </a>
         <p class="contact-info">Contact us at: <a href="mailto:info@eracinema.com">info@eracinema.com</a></p>
+        <p class="business-link"><a href="business-overview.html">Business Overview</a></p>
     </div>
 
     <footer>

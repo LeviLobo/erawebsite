@@ -6,28 +6,27 @@
     <title>ERA - Business Overview</title>
     <link href="https://fonts.googleapis.com/css2?family=Futura:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* Keyframes for animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
         @keyframes glitch {
             0% { text-shadow: 1px 0 #D4A576, -1px 0 #F5F5F5; }
             50% { text-shadow: -1px 0 #D4A576, 1px 0 #F5F5F5; }
             100% { text-shadow: 1px 0 #D4A576, -1px 0 #F5F5F5; }
         }
-
         @keyframes pulse {
             0%, 100% { text-shadow: 0 0 3px #B89B72; }
             50% { text-shadow: 0 0 5px #B89B72, 0 0 8px #8B0000; }
         }
-
         @keyframes trailFade {
             0% { opacity: 0; }
             100% { opacity: 0.5; }
         }
-
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(5px); }
+        }
         body {
             margin: 0;
             padding: 0;
@@ -38,7 +37,6 @@
             overflow-x: hidden;
             position: relative;
         }
-
         .hero {
             position: relative;
             height: 100vh;
@@ -48,7 +46,6 @@
             text-align: center;
             overflow: hidden;
         }
-
         .hero canvas {
             position: absolute;
             top: 0;
@@ -58,11 +55,10 @@
             z-index: 1;
             will-change: transform;
         }
-
         .content-wrapper {
             position: relative;
             z-index: 2;
-            background: linear-gradient(145deg, rgba(28, 37, 38, 0.9), rgba(0, 0, 0, 0.95));
+            background: linear-gradient(145deg, rgba(28, 37, 38, 0.7), rgba(0, 0, 0, 0.75));
             padding: 15px 10px;
             border-radius: 4px;
             box-shadow: 0 0 10px rgba(212, 165, 118, 0.3);
@@ -77,9 +73,8 @@
             justify-content: center;
             align-items: center;
         }
-
         .hero h1 {
-            font-size: clamp(1.4em, 3.5vw, 2.4em); /* Smaller logo */
+            font-size: clamp(1.4em, 3.5vw, 2.4em);
             font-weight: 700;
             letter-spacing: 0.05em;
             margin-bottom: 12px;
@@ -89,24 +84,22 @@
             opacity: 0;
             text-transform: uppercase;
         }
-
         .hero img {
-            max-width: clamp(25vw, 250px, 45vw);
+            max-width: clamp(12.5vw, 125px, 22.5vw);
             height: auto;
             object-fit: contain;
             border: 1px solid #D4A576;
             border-radius: 3px;
             margin-top: 12px;
             filter: brightness(1.1) contrast(1.05);
-            transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease, opacity 0.2s ease;
         }
-
         .hero img:hover {
             transform: scale(1.02);
             box-shadow: 0 0 10px rgba(212, 165, 118, 0.5);
             filter: brightness(1.15) contrast(1.1) saturate(0.9);
+            opacity: 0.85;
         }
-
         h2 {
             font-size: clamp(1.2em, 2.5vw, 1.8em);
             font-weight: 700;
@@ -116,7 +109,6 @@
             opacity: 0;
             text-align: center;
         }
-
         .content-wrapper p {
             font-size: clamp(0.8em, 1.5vw, 1em);
             font-weight: 400;
@@ -128,7 +120,6 @@
             text-align: center;
             max-width: 90%;
         }
-
         .nav-links {
             font-size: clamp(0.7em, 1.4vw, 0.9em);
             font-weight: 400;
@@ -138,19 +129,26 @@
             animation: fadeIn 0.8s ease-out 0.8s forwards;
             opacity: 0;
         }
-
         .nav-links a {
             color: #D4A576;
             text-decoration: none;
             margin: 0 10px;
             transition: color 0.2s ease;
         }
-
         .nav-links a:hover {
             color: #F5F5F5;
             text-decoration: underline;
         }
-
+        .scroll-arrow {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 24px;
+            fill: #D4A576;
+            animation: bounce 1.5s infinite ease-in-out;
+        }
         footer {
             position: fixed;
             bottom: 0;
@@ -165,32 +163,30 @@
             border-top: 1px solid rgba(245, 245, 245, 0.1);
             z-index: 2;
         }
-
         footer p {
             margin: 0;
         }
-
         @media (max-width: 600px) {
             .content-wrapper {
                 max-width: 90%;
                 width: 100%;
                 padding: 10px 5px;
             }
-
             .hero h1 {
                 font-size: clamp(1.2em, 3vw, 2em);
             }
-
             .hero img {
-                max-width: clamp(20vw, 200px, 40vw);
+                max-width: clamp(10vw, 100px, 20vw);
             }
-
             h2 {
                 font-size: clamp(1em, 2vw, 1.4em);
             }
-
             .content-wrapper p {
                 font-size: clamp(0.7em, 1.3vw, 0.9em);
+            }
+            .scroll-arrow {
+                width: 18px;
+                height: 18px;
             }
         }
     </style>
@@ -205,9 +201,12 @@
             </a>
             <p class="nav-links">
                 <a href="index.html">Home</a>
-                <a href="business-overview.html">Business Overview</a>
-                <a href="team.html">Team</a>
+                <a href="business-overview.html">What We Do</a>
+                <a href="team.html">Our Team</a>
             </p>
+            <svg class="scroll-arrow" viewBox="0 0 24 24">
+                <path d="M12 21l-7-7 1.4-1.4L12 18.2l5.6-5.6L19 14l-7 7z"/>
+            </svg>
         </div>
     </section>
     <section class="content-wrapper">
@@ -246,7 +245,9 @@
         canvas.height = window.innerHeight;
 
         const stars = [];
+        const shootingStars = [];
         const numStars = 20;
+        const maxShootingStars = 5;
 
         function clamp(value, min, max) {
             return Math.min(Math.max(value, min), max);
@@ -254,15 +255,16 @@
 
         class Star {
             constructor() {
-                this.centerX = Math.random() * canvas.width; // Random center across canvas
-                this.centerY = Math.random() * canvas.height; // Random center across canvas
-                this.radius = clamp(50, 20 * (window.innerWidth / 100), 400); // Varied radii
-                this.size = Math.random() * 2.5 + 0.5; // 0.5px to 3px for depth
-                this.angularSpeed = Math.random() * 0.0005 + 0.0001; // Slower rotation
+                this.centerX = Math.random() * canvas.width;
+                this.centerY = Math.random() * canvas.height;
+                this.radius = clamp(50, 15 * (window.innerWidth / 100), 300);
+                this.size = Math.random() * 2.5 + 0.5;
+                this.angularSpeed = Math.random() * 0.0015 + 0.0003;
                 this.angle = Math.random() * Math.PI * 2;
-                this.opacity = 0;
+                this.baseOpacity = this.size > 2 ? 0.6 : 0.4;
+                this.twinkleSpeed = Math.random() * 0.5 + 0.5;
                 this.fadeInStart = performance.now();
-                this.trailPoints = []; // Store fixed trail positions
+                this.trailPoints = [];
             }
 
             update() {
@@ -270,21 +272,24 @@
                 this.x = this.centerX + this.radius * Math.cos(this.angle);
                 this.y = this.centerY + this.radius * Math.sin(this.angle);
 
-                // Add new trail point
                 this.trailPoints.push({ x: this.x, y: this.y });
-
-                // Cap at 3600 to prevent performance issues
-                if (this.trailPoints.length > 3600) {
+                if (this.trailPoints.length > 200) {
                     this.trailPoints.shift();
                 }
 
                 const timeElapsed = (performance.now() - this.fadeInStart) / 2000;
-                this.opacity = Math.min(timeElapsed, this.size > 2 ? 0.6 : 0.4); // Brighter for larger stars
+                const twinkle = Math.sin(performance.now() * 0.002 * this.twinkleSpeed) * 0.2;
+                this.opacity = Math.min(timeElapsed, this.baseOpacity + twinkle);
             }
 
             draw() {
                 ctx.beginPath();
-                if (this.trailPoints.length > 0) {
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(245, 245, 245, ${this.opacity})`;
+                ctx.fill();
+
+                if (this.trailPoints.length > 1) {
+                    ctx.beginPath();
                     ctx.moveTo(this.trailPoints[0].x, this.trailPoints[0].y);
                     for (let i = 1; i < this.trailPoints.length; i++) {
                         const point = this.trailPoints[i];
@@ -293,7 +298,75 @@
                         gradient.addColorStop(0, `rgba(245, 245, 245, ${opacity})`);
                         gradient.addColorStop(1, 'rgba(245, 245, 245, 0)');
                         ctx.strokeStyle = gradient;
-                        ctx.lineWidth = this.size * 1.5; // Thicker trails for larger stars
+                        ctx.lineWidth = this.size * 2;
+                        ctx.lineTo(point.x, point.y);
+                        ctx.stroke();
+                        ctx.beginPath();
+                        ctx.moveTo(point.x, point.y);
+                    }
+                }
+            }
+        }
+
+        class ShootingStar {
+            constructor() {
+                const edge = Math.floor(Math.random() * 4);
+                if (edge === 0) {
+                    this.x = 0;
+                    this.y = Math.random() * canvas.height;
+                    this.vx = Math.random() * 3 + 3;
+                    this.vy = (Math.random() - 0.5) * 3;
+                } else if (edge === 1) {
+                    this.x = canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.vx = -(Math.random() * 3 + 3);
+                    this.vy = (Math.random() - 0.5) * 3;
+                } else if (edge === 2) {
+                    this.x = Math.random() * canvas.width;
+                    this.y = 0;
+                    this.vx = (Math.random() - 0.5) * 3;
+                    this.vy = Math.random() * 3 + 3;
+                } else {
+                    this.x = Math.random() * canvas.width;
+                    this.y = canvas.height;
+                    this.vx = (Math.random() - 0.5) * 3;
+                    this.vy = -(Math.random() * 3 + 3);
+                }
+                this.size = Math.random() * 1.2 + 0.3;
+                this.opacity = Math.random() * 0.2 + 0.3;
+                this.trailPoints = [];
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.opacity -= 0.005;
+
+                this.trailPoints.push({ x: this.x, y: this.y });
+                if (this.trailPoints.length > 50) {
+                    this.trailPoints.shift();
+                }
+
+                return this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height || this.opacity <= 0;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(245, 245, 245, ${this.opacity})`;
+                ctx.fill();
+
+                if (this.trailPoints.length > 1) {
+                    ctx.beginPath();
+                    ctx.moveTo(this.trailPoints[0].x, this.trailPoints[0].y);
+                    for (let i = 1; i < this.trailPoints.length; i++) {
+                        const point = this.trailPoints[i];
+                        const opacity = this.opacity * (1 - i / this.trailPoints.length);
+                        const gradient = ctx.createLinearGradient(this.x, this.y, point.x, point.y);
+                        gradient.addColorStop(0, `rgba(245, 245, 245, ${opacity})`);
+                        gradient.addColorStop(1, 'rgba(245, 245, 245, 0)');
+                        ctx.strokeStyle = gradient;
+                        ctx.lineWidth = this.size * 1.5;
                         ctx.lineTo(point.x, point.y);
                         ctx.stroke();
                         ctx.beginPath();
@@ -307,7 +380,6 @@
             stars.push(new Star());
         }
 
-        // Central North Star
         function drawNorthStar() {
             ctx.beginPath();
             ctx.arc(canvas.width / 2, canvas.height / 2, 4, 0, Math.PI * 2);
@@ -318,10 +390,24 @@
         function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             drawNorthStar();
+
             stars.forEach(star => {
                 star.update();
                 star.draw();
             });
+
+            if (Math.random() < 0.1 && shootingStars.length < maxShootingStars) {
+                shootingStars.push(new ShootingStar());
+            }
+
+            for (let i = shootingStars.length - 1; i >= 0; i--) {
+                if (shootingStars[i].update()) {
+                    shootingStars.splice(i, 1);
+                } else {
+                    shootingStars[i].draw();
+                }
+            }
+
             requestAnimationFrame(animate);
         }
 
@@ -331,10 +417,11 @@
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             stars.forEach(star => {
-                star.centerX = Math.random() * canvas.width; // Reassign random center
+                star.centerX = Math.random() * canvas.width;
                 star.centerY = Math.random() * canvas.height;
-                star.radius = clamp(50, 20 * (window.innerWidth / 100), 400);
+                star.radius = clamp(50, 15 * (window.innerWidth / 100), 300);
             });
+            shootingStars.length = 0;
         });
     </script>
 </body>

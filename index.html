@@ -205,12 +205,15 @@
                 this.x = this.centerX + this.radius * Math.cos(this.angle);
                 this.y = this.centerY + this.radius * Math.sin(this.angle);
 
-                this.trailPoints.push({ x: this.x, y: this.y });
-                if (this.trailPoints.length > 200) {
-                    this.trailPoints.shift();
+                // Only add trail points after fade-in completes
+                const timeElapsed = (performance.now() - this.fadeInStart) / 2000;
+                if (timeElapsed >= 1) {
+                    this.trailPoints.push({ x: this.x, y: this.y });
+                    if (this.trailPoints.length > 200) {
+                        this.trailPoints.shift();
+                    }
                 }
 
-                const timeElapsed = (performance.now() - this.fadeInStart) / 2000;
                 const twinkle = Math.sin(performance.now() * 0.002 * this.twinkleSpeed) * 0.2;
                 this.opacity = Math.min(timeElapsed, this.baseOpacity + twinkle);
             }
@@ -221,7 +224,9 @@
                 ctx.fillStyle = `rgba(245, 245, 245, ${this.opacity})`;
                 ctx.fill();
 
-                if (this.trailPoints.length > 1) {
+                // Only draw trails after fade-in completes
+                const timeElapsed = (performance.now() - this.fadeInStart) / 2000;
+                if (timeElapsed >= 1 && this.trailPoints.length > 1) {
                     ctx.beginPath();
                     ctx.moveTo(this.trailPoints[0].x, this.trailPoints[0].y);
                     for (let i = 1; i < this.trailPoints.length; i++) {

@@ -154,10 +154,20 @@
         }
         .team-member img {
             max-width: clamp(10vw, 100px, 20vw);
-            height: auto;
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
             border: 1px solid #D4A576;
-            border-radius: 3px;
+            border-radius: 50%;
             margin-bottom: 10px;
+            filter: brightness(1.1) contrast(1.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease, opacity 0.2s ease;
+        }
+        .team-member img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 10px rgba(212, 165, 118, 0.5);
+            filter: brightness(1.15) contrast(1.1) saturate(0.9);
+            opacity: 0.85;
         }
         footer {
             position: fixed;

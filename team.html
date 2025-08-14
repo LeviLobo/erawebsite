@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ERA - Team</title>
+    <title>ERA - Our Team</title>
     <link href="https://fonts.googleapis.com/css2?family=Futura:wght@400;700&display=swap" rel="stylesheet">
     <style>
         @keyframes fadeIn {
@@ -19,10 +19,6 @@
             0%, 100% { text-shadow: 0 0 3px #B89B72; }
             50% { text-shadow: 0 0 5px #B89B72, 0 0 8px #8B0000; }
         }
-        @keyframes trailFade {
-            0% { opacity: 0; }
-            100% { opacity: 0.5; }
-        }
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(5px); }
@@ -37,6 +33,13 @@
             overflow-x: hidden;
             position: relative;
         }
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            will-change: transform;
+        }
         .hero {
             position: relative;
             height: 100vh;
@@ -45,15 +48,7 @@
             align-items: center;
             text-align: center;
             overflow: hidden;
-        }
-        .hero canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            will-change: transform;
+            z-index: 2;
         }
         .content-wrapper {
             position: relative;
@@ -100,13 +95,25 @@
             filter: brightness(1.15) contrast(1.1) saturate(0.9);
             opacity: 0.85;
         }
-        .hero p {
-            font-size: clamp(0.8em, 1.5vw, 1em);
-            font-weight: 400;
-            line-height: 1.3;
-            color: #D3D3D3;
+        h2 {
+            font-size: clamp(1.2em, 2.5vw, 1.8em);
+            font-weight: 700;
+            color: #D4A576;
+            margin-bottom: 10px;
             animation: fadeIn 0.8s ease-out 0.4s forwards;
             opacity: 0;
+            text-align: center;
+        }
+        .content-wrapper p {
+            font-size: clamp(0.8em, 1.5vw, 1em);
+            font-weight: 400;
+            line-height: 1.4;
+            color: #D3D3D3;
+            margin-bottom: 10px;
+            animation: fadeIn 0.8s ease-out 0.6s forwards;
+            opacity: 0;
+            text-align: center;
+            max-width: 90%;
         }
         .nav-links {
             font-size: clamp(0.7em, 1.4vw, 0.9em);
@@ -114,7 +121,7 @@
             text-align: center;
             margin-top: 10px;
             margin-bottom: 20px;
-            animation: fadeIn 0.8s ease-out 0.6s forwards;
+            animation: fadeIn 0.8s ease-out 0.8s forwards;
             opacity: 0;
         }
         .nav-links a {
@@ -137,52 +144,20 @@
             fill: #D4A576;
             animation: bounce 1.5s infinite ease-in-out;
         }
-        .team-section {
-            padding: 50px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
-        }
-        .team-section h2 {
-            font-size: clamp(1.2em, 2.5vw, 1.8em);
-            font-weight: 700;
-            color: #D4A576;
-            margin-bottom: 20px;
-            animation: fadeIn 0.8s ease-out 0.4s forwards;
-            opacity: 0;
-            text-align: center;
-            text-transform: uppercase;
-        }
         .team-member {
-            margin-bottom: 30px;
-            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+            animation: fadeIn 0.8s ease-out 0.6s forwards;
+            opacity: 0;
         }
         .team-member img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
+            max-width: clamp(10vw, 100px, 20vw);
+            height: auto;
+            border: 1px solid #D4A576;
+            border-radius: 3px;
             margin-bottom: 10px;
-            border: 3px solid #D4A576;
-            animation: fadeIn 0.8s ease-out 0.6s forwards;
-            opacity: 0;
-        }
-        .team-member h3 {
-            font-size: clamp(1em, 2vw, 1.4em);
-            font-weight: 700;
-            color: #D4A576;
-            margin-bottom: 5px;
-            animation: fadeIn 0.8s ease-out 0.6s forwards;
-            opacity: 0;
-        }
-        .team-member p {
-            font-size: clamp(0.8em, 1.5vw, 1em);
-            font-weight: 400;
-            color: #D3D3D3;
-            line-height: 1.4;
-            animation: fadeIn 0.8s ease-out 0.8s forwards;
-            opacity: 0;
         }
         footer {
             position: fixed;
@@ -213,25 +188,18 @@
             .hero img {
                 max-width: clamp(10vw, 100px, 20vw);
             }
-            .team-section {
-                padding: 20px;
-            }
-            .team-section h2 {
+            h2 {
                 font-size: clamp(1em, 2vw, 1.4em);
             }
-            .team-member img {
-                width: 120px;
-                height: 120px;
-            }
-            .team-member h3 {
-                font-size: clamp(0.9em, 1.8vw, 1.2em);
-            }
-            .team-member p {
+            .content-wrapper p {
                 font-size: clamp(0.7em, 1.3vw, 0.9em);
             }
             .scroll-arrow {
                 width: 18px;
                 height: 18px;
+            }
+            .team-member img {
+                max-width: clamp(8vw, 80px, 16vw);
             }
         }
     </style>
@@ -255,25 +223,25 @@
             </svg>
         </div>
     </section>
-    <section class="team-section">
+    <section class="content-wrapper">
         <h2>Meet Our Team</h2>
-        <div class="content-wrapper team-member">
-            <img src="Levi-Lobo-Era-Cinema.webp" alt="Levi Lobo">
+        <div class="team-member">
+            <img src="levi-lobo.jpg" alt="Levi Lobo">
             <h3>Levi Lobo</h3>
-            <p>Founder and CEO of ERA, Levi Lobo is an actor and producer from Albuquerque, New Mexico, with Mestizo heritage. Known for roles in <em>Fast Color</em>, <em>SGT. Will Gardner</em>, and <em>The Weight of It All</em>, Levi brings raw authenticity to his performances. His producing work, including <em>Instructions for Yesterday</em> and <em>Consider the Violence of Cutting Roses</em>, reflects his commitment to bold, diverse narratives. Levi’s vision drives ERA’s mission to craft stories that resonate deeply.</p>
+            <p>Founder and CEO of ERA, Levi Lobo is an actor and producer from Albuquerque, New Mexico, with Mestizo heritage. Known for roles in Fast Color, SGT. Will Gardner, and The Weight of It All, Levi brings raw authenticity to his performances. His producing work, including Instructions for Yesterday and Consider the Violence of Cutting Roses, reflects his commitment to bold, diverse narratives. Levi’s vision drives ERA’s mission to craft stories that resonate deeply.</p>
         </div>
-        <div class="content-wrapper team-member">
-            <img src="IMG_7258.jpeg" alt="Dannie McCallum">
+        <div class="team-member">
+            <img src="dannie-mccallum.jpg" alt="Dannie McCallum">
             <h3>Dannie McCallum</h3>
-            <p>Dannie McCallum, a rising star with Mexican heritage, shines in <em>Echo</em> and <em>Here</em>. Her grounded yet powerful performances reflect her deep connection to community and culture. As a key collaborator at ERA, Dannie brings empathy and resilience to her roles, contributing to projects that challenge conventions and inspire audiences.</p>
+            <p>Dannie McCallum, a rising star with Mexican heritage, shines in Echo and Here. Her grounded yet powerful performances reflect her deep connection to community and culture. As a key collaborator at ERA, Dannie brings empathy and resilience to her roles, contributing to projects that challenge conventions and inspire audiences.</p>
         </div>
-        <div class="content-wrapper team-member">
-            <img src="OliverRoittPic1" alt="Ollie Roitt">
+        <div class="team-member">
+            <img src="ollie-roitt.jpg" alt="Ollie Roitt">
             <h3>Ollie Roitt</h3>
             <p>Ollie Roitt brings over 13 years of expertise in public relations and Family Office management to ERA, with a track record of delivering results for C-suite executives in financial services and corporates. Having worked with leading firms like CEB and Reed Business Information, Ollie enhances ERA’s global outreach and investor relations, ensuring strategic partnerships and financial growth align with the studio’s creative vision.</p>
         </div>
-        <div class="content-wrapper team-member">
-            <img src="MaenSamaraPic1" alt="Maen Samara">
+        <div class="team-member">
+            <img src="maen-samara.jpg" alt="Maen Samara">
             <h3>Maen Samara</h3>
             <p>Maen Samara, a visionary entrepreneur, leads ERA’s strategic production efforts. Based in Dubai since 2011, Maen founded Virtua, a scalable HR and payroll solution, later acquired by the Al Serkal group and rebranded as Trans Skills, serving over 40 countries. His leadership, marked by precision and innovation, drives ERA’s global production strategy, ensuring bold, impactful cinematic projects.</p>
         </div>
@@ -285,22 +253,44 @@
         const canvas = document.getElementById('starCanvas');
         const ctx = canvas.getContext('2d');
 
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        function setCanvasSize() {
+            canvas.width = window.innerWidth;
+            canvas.height = document.body.scrollHeight;
+        }
+
+        setCanvasSize();
 
         const stars = [];
         const shootingStars = [];
-        const numStars = 20;
+        let numStars = 50;
         const maxShootingStars = 5;
+        const colorPalette = ['#F5F5FF', '#FFF5F5', '#FFFFF0', '#F0FFFF'];
 
         function clamp(value, min, max) {
             return Math.min(Math.max(value, min), max);
         }
 
+        function drawStarShape(x, y, outerRadius, innerRadius, points) {
+            const angleStep = Math.PI / points;
+            ctx.beginPath();
+            for (let i = 0; i < points * 2; i++) {
+                const radius = i % 2 === 0 ? outerRadius : innerRadius;
+                const angle = i * angleStep - Math.PI / 2;
+                const px = x + radius * Math.cos(angle);
+                const py = y + radius * Math.sin(angle);
+                if (i === 0) {
+                    ctx.moveTo(px, py);
+                } else {
+                    ctx.lineTo(px, py);
+                }
+            }
+            ctx.closePath();
+        }
+
         class Star {
-            constructor() {
+            constructor(yMin = 0, yMax = canvas.height) {
                 this.centerX = Math.random() * canvas.width;
-                this.centerY = Math.random() * canvas.height;
+                this.centerY = Math.random() * (yMax - yMin) + yMin;
                 this.radius = clamp(50, 15 * (window.innerWidth / 100), 300);
                 this.size = Math.random() * 2.5 + 0.5;
                 this.angularSpeed = Math.random() * 0.0015 + 0.0003;
@@ -308,7 +298,7 @@
                 this.baseOpacity = this.size > 2 ? 0.6 : 0.4;
                 this.twinkleSpeed = Math.random() * 0.5 + 0.5;
                 this.fadeInStart = performance.now();
-                this.trailPoints = [];
+                this.color = colorPalette[Math.floor(Math.random() * colorPalette.length)];
             }
 
             update() {
@@ -316,69 +306,49 @@
                 this.x = this.centerX + this.radius * Math.cos(this.angle);
                 this.y = this.centerY + this.radius * Math.sin(this.angle);
 
-                this.trailPoints.push({ x: this.x, y: this.y });
-                if (this.trailPoints.length > 200) {
-                    this.trailPoints.shift();
-                }
-
                 const timeElapsed = (performance.now() - this.fadeInStart) / 2000;
                 const twinkle = Math.sin(performance.now() * 0.002 * this.twinkleSpeed) * 0.2;
                 this.opacity = Math.min(timeElapsed, this.baseOpacity + twinkle);
             }
 
             draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(245, 245, 245, ${this.opacity})`;
+                ctx.save();
+                ctx.shadowColor = this.color;
+                ctx.shadowBlur = this.opacity * 5;
+                drawStarShape(this.x, this.y, this.size, this.size / 2, 5);
+                ctx.fillStyle = `rgba(${parseInt(this.color.slice(1, 3), 16)}, ${parseInt(this.color.slice(3, 5), 16)}, ${parseInt(this.color.slice(5, 7), 16)}, ${this.opacity})`;
                 ctx.fill();
-
-                if (this.trailPoints.length > 1) {
-                    ctx.beginPath();
-                    ctx.moveTo(this.trailPoints[0].x, this.trailPoints[0].y);
-                    for (let i = 1; i < this.trailPoints.length; i++) {
-                        const point = this.trailPoints[i];
-                        const opacity = this.opacity * (1 - i / this.trailPoints.length);
-                        const gradient = ctx.createLinearGradient(this.x, this.y, point.x, point.y);
-                        gradient.addColorStop(0, `rgba(245, 245, 245, ${opacity})`);
-                        gradient.addColorStop(1, 'rgba(245, 245, 245, 0)');
-                        ctx.strokeStyle = gradient;
-                        ctx.lineWidth = this.size * 2;
-                        ctx.lineTo(point.x, point.y);
-                        ctx.stroke();
-                        ctx.beginPath();
-                        ctx.moveTo(point.x, point.y);
-                    }
-                }
+                ctx.restore();
             }
         }
 
         class ShootingStar {
-            constructor() {
+            constructor(yMin = 0, yMax = canvas.height) {
                 const edge = Math.floor(Math.random() * 4);
                 if (edge === 0) {
                     this.x = 0;
-                    this.y = Math.random() * canvas.height;
+                    this.y = Math.random() * (yMax - yMin) + yMin;
                     this.vx = Math.random() * 3 + 3;
                     this.vy = (Math.random() - 0.5) * 3;
                 } else if (edge === 1) {
                     this.x = canvas.width;
-                    this.y = Math.random() * canvas.height;
+                    this.y = Math.random() * (yMax - yMin) + yMin;
                     this.vx = -(Math.random() * 3 + 3);
                     this.vy = (Math.random() - 0.5) * 3;
                 } else if (edge === 2) {
                     this.x = Math.random() * canvas.width;
-                    this.y = 0;
+                    this.y = yMin;
                     this.vx = (Math.random() - 0.5) * 3;
                     this.vy = Math.random() * 3 + 3;
                 } else {
                     this.x = Math.random() * canvas.width;
-                    this.y = canvas.height;
+                    this.y = yMax;
                     this.vx = (Math.random() - 0.5) * 3;
                     this.vy = -(Math.random() * 3 + 3);
                 }
                 this.size = Math.random() * 1.2 + 0.3;
                 this.opacity = Math.random() * 0.2 + 0.3;
-                this.trailPoints = [];
+                this.color = colorPalette[Math.floor(Math.random() * colorPalette.length)];
             }
 
             update() {
@@ -386,37 +356,17 @@
                 this.y += this.vy;
                 this.opacity -= 0.005;
 
-                this.trailPoints.push({ x: this.x, y: this.y });
-                if (this.trailPoints.length > 50) {
-                    this.trailPoints.shift();
-                }
-
                 return this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height || this.opacity <= 0;
             }
 
             draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(245, 245, 245, ${this.opacity})`;
+                ctx.save();
+                ctx.shadowColor = this.color;
+                ctx.shadowBlur = this.opacity * 5;
+                drawStarShape(this.x, this.y, this.size, this.size / 2, 5);
+                ctx.fillStyle = `rgba(${parseInt(this.color.slice(1, 3), 16)}, ${parseInt(this.color.slice(3, 5), 16)}, ${parseInt(this.color.slice(5, 7), 16)}, ${this.opacity})`;
                 ctx.fill();
-
-                if (this.trailPoints.length > 1) {
-                    ctx.beginPath();
-                    ctx.moveTo(this.trailPoints[0].x, this.trailPoints[0].y);
-                    for (let i = 1; i < this.trailPoints.length; i++) {
-                        const point = this.trailPoints[i];
-                        const opacity = this.opacity * (1 - i / this.trailPoints.length);
-                        const gradient = ctx.createLinearGradient(this.x, this.y, point.x, point.y);
-                        gradient.addColorStop(0, `rgba(245, 245, 245, ${opacity})`);
-                        gradient.addColorStop(1, 'rgba(245, 245, 245, 0)');
-                        ctx.strokeStyle = gradient;
-                        ctx.lineWidth = this.size * 1.5;
-                        ctx.lineTo(point.x, point.y);
-                        ctx.stroke();
-                        ctx.beginPath();
-                        ctx.moveTo(point.x, point.y);
-                    }
-                }
+                ctx.restore();
             }
         }
 
@@ -458,14 +408,24 @@
         animate();
 
         window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+            setCanvasSize();
             stars.forEach(star => {
                 star.centerX = Math.random() * canvas.width;
                 star.centerY = Math.random() * canvas.height;
                 star.radius = clamp(50, 15 * (window.innerWidth / 100), 300);
             });
             shootingStars.length = 0;
+        });
+
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.body.scrollHeight;
+            if (scrollY + windowHeight > documentHeight / 2 && stars.length < 100) {
+                for (let i = 0; i < 10; i++) {
+                    stars.push(new Star(scrollY, scrollY + windowHeight));
+                }
+            }
         });
     </script>
 </body>

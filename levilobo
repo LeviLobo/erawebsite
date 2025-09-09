@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Levi Lobo - Professional Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Futura:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            font-family: 'Futura', sans-serif;
+            color: #F5F5F5;
+            text-align: center;
+            padding: 20px;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            max-width: 600px;
+            background: rgba(28, 37, 38, 0.6);
+            padding: 30px;
+            border-radius: 10px;
+            border: 2px solid #D4A576;
+            box-shadow: 0 0 10px rgba(212, 165, 118, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .photo {
+            margin-bottom: 20px;
+            max-width: 100%;
+            height: auto;
+        }
+        img {
+            max-width: 250px;
+            border: 2px solid #D4A576;
+            border-radius: 5px;
+        }
+        h1 {
+            font-size: 2.8em;
+            color: #D4A576;
+            margin-bottom: 10px;
+            text-shadow: 0 0 8px #B89B72;
+        }
+        .tagline {
+            font-size: 1.3em;
+            color: #D3D3D3;
+            margin-bottom: 20px;
+        }
+        .narrative {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2.2em;
+            }
+            .tagline {
+                font-size: 1.1em;
+            }
+            .narrative {
+                font-size: 1em;
+            }
+            img {
+                max-width: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="photo">
+            <a href="https://example.com/levi-lobo-headshot.jpg">
+                <img src="levi-lobo-headshot.jpg" alt="Levi Lobo Professional Portrait">
+            </a>
+        </div>
+        <h1>Levi Lobo</h1>
+        <p class="tagline">Industry Professional | Multifaceted Talent</p>
+        <div class="narrative">
+            <p>Levi Lobo, born June 23, 1994, in Albuquerque, New Mexico, is a seasoned entertainment professional with a diverse skill set as an author, writer, actor, producer, musician, and painter. Rooted in Mexican, Apache, and Spanish European heritage, his career reflects resilience and a storytelling passion sparked by *Zorro*, honed through early challenges including a near-fatal birth.</p>
+            <p>From 2016 to 2018, Levi served at Fox Studios for two years, collaborating with HR executive Jackie Brown and casting head Anne Hart, gaining critical production experience and forging key industry ties. His acting portfolio shines with his starring debut in *The Weight of It All*, generating industry buzz for its raw indie narrative, alongside sharing the screen with Gugu Mbatha-Raw in *Fast Color* (2018), Max Martini in *SGT. Will Gardner* (2019), Robert Taylor in *Longmire*, Nick Nolte in *Graves*, and Élodie Yung in *The Cleaning Lady*. As a producer, his project *Tramp*—adapted from his novel under review at CAA—demonstrates his commitment to culturally rich storytelling.</p>
+            <p>Levi’s musical catalog includes three studio albums—*Nowadays*, *Another Side of Nowadays*, and *Through It All*—showcasing his creative versatility. His short films, *Instructions for Yesterday* and *Consider the Violence of Cutting Roses*, have earned global festival acclaim, while his paintings and the novel *The Tramp* highlight his multidisciplinary expertise. With a feature film creating industry waves and a proven Fox Studios background, Levi offers investors and casting directors a dynamic, high-potential talent.</p>
+        </div>
+    </div>
+</body>
+</html>

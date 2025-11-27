@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ERA RECORDING ARCHIVE</title>
+  <link href="https://fonts.googleapis.com/css2?family=Futura:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes glitch {
+      0%   { text-shadow: 1px 0 #D4A576, -1px 0 #F5F5F5; }
+      50%  { text-shadow: -1px 0 #D4A576, 1px 0 #F5F5F5; }
+      100% { text-shadow: 1px 0 #D4A576, -1px 0 #F5F5F5; }
+    }
+    @keyframes pulse {
+      0%, 100% { text-shadow: 0 0 4px #D4A576; }
+      50%      { text-shadow: 0 0 10px #D4A576, 0 0 20px #B89B72; }
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      color: #F5F5F5;
+      font-family: 'Futura', sans-serif;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0; left: 0;
+      z-index: 1;
+    }
+
+    .manifesto {
+      position: relative;
+      z-index: 2;
+      max-width: 860px;
+      padding: 50px 40px;
+      background: linear-gradient(145deg, rgba(28,37,38,0.85), rgba(0,0,0,0.9));
+      border: 1px solid rgba(212,165,118,0.35);
+      border-radius: 6px;
+      box-shadow: 0 0 30px rgba(212,165,118,0.25);
+      backdrop-filter: blur(8px);
+      text-align: center;
+      animation: fadeIn 1.2s ease-out;
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 9vw, 6rem);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: #D4A576;
+      margin-bottom: 40px;
+      text-transform: uppercase;
+      animation: glitch 4s infinite alternate, pulse 5s infinite ease-in-out;
+    }
+
+    p {
+      font-size: clamp(1.1rem, 3vw, 1.5rem);
+      line-height: 1.8;
+      margin: 28px auto;
+      max-width: 800px;
+      opacity: 0;
+      animation: fadeIn 1.5s ease-out forwards;
+    }
+    p:nth-child(2) { animation-delay: 0.6s; }
+    p:nth-child(3) { animation-delay: 1.2s; }
+    p:nth-child(4) { animation-delay: 1.8s; }
+    p:nth-child(5) { animation-delay: 2.4s; }
+    p:nth-child(6) { animation-delay: 3.0s; }
+
+    strong {
+      color: #D4A576;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    em {
+      color: #F5F5F5;
+      font-style: normal;
+      text-shadow: 0 0 8px rgba(212,165,118,0.6);
+    }
+
+    footer {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.9rem;
+      color: #888;
+      letter-spacing: 1px;
+      z-index: 3;
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="starCanvas"></canvas>
+
+  <div class="manifesto">
+    <h1>ERA RECORDING ARCHIVE</h1>
+
+    <p><strong>E</strong> – Era. Founded in 2019, we began in the raw, trembling hinge between a dying world and whatever wild thing comes next.</p>
+
+    <p><strong>R</strong> – Recording. From that first fracture we have seized the unfiltered human stories: every cracked voice, every defiant heartbeat, every whisper that refused the dark.</p>
+
+    <p><strong>A</strong> – Archive. We swear, with every future breath and fire we can steal, to carry these sparks across every night that tries to swallow them, refusing surrender, refusing silence.</p>
+
+    <p>Like Dylan Thomas said,<br>
+    <em>Do not go gentle into that good night.<br>
+    Rage, rage against the dying of the light.</em></p>
+
+    <p>With that same fury we fight to keep the spark of humanity alive.<br>
+    Forever.<br>
+    ERA is that fight.<br>
+    Born in 2019.<br>
+    Never over.</p>
+  </div>
+
+  <footer>© ERA 2019–∞</footer>
+
+  <!-- Same starfield script from your original page -->
+  <script>
+    const canvas = document.getElementById('starCanvas');
+    const ctx = canvas.getContext('2d');
+
+    function setCanvasSize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    setCanvasSize();
+    window.addEventListener('resize', setCanvasSize);
+
+    const stars = [];
+    const shootingStars = [];
+    const colorPalette = ['#F5F5FF', '#FFF5F5', '#FFFFF0', '#F0FFFF'];
+
+    class Star {
+      constructor() {
+        this.centerX = Math.random() * canvas.width;
+        this.centerY = Math.random() * canvas.height;
+        this.radius = Math.random() * 120 + 30;
+        this.size = Math.random() * 2 + 0.8;
+        this.angle = Math.random() * Math.PI * 2;
+        this.angularSpeed = Math.random() * 0.001 + 0.0002;
+        this.twinkleSpeed = Math.random() * 0.8 + 0.4;
+        this.color = colorPalette[Math.floor(Math.random() * colorPalette.length)];
+      }
+      update() {
+        this.angle += this.angularSpeed;
+        this.x = this.centerX + this.radius * Math.cos(this.angle);
+        this.y = this.centerY + this.radius * Math.sin(this.angle);
+        const twinkle = Math.sin(performance.now() * 0.002 * this.twinkleSpeed) * 0.3;
+        this.opacity = 0.6 + twinkle;
+      }
+      draw() {
+        ctx.save();
+        ctx.shadowColor = this.color;
+        ctx.shadowBlur = 10;
+        ctx.fillStyle = this.color;
+        ctx.globalAlpha = this.opacity;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    class ShootingStar {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = 0;
+        this.vx = (Math.random() - 0.5) * 8;
+        this.vy = Math.random() * 4 + 4;
+        this.size = Math.random() * 1.5 + 0.5;
+        this.opacity = 1;
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.opacity -= 0.02;
+        return this.opacity <= 0 || this.y > canvas.height;
+      }
+      draw() {
+        ctx.save();
+        ctx.globalAlpha = this.opacity;
+        ctx.fillStyle = '#F5F5F5';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    for (let i = 0; i < 80; i++) stars.push(new Star());
+
+    function animate() {
+      ctx.fillStyle = 'rgba(0,0,0,0.08)';
+      ctx.fillRect(0,00, 0, canvas.width, canvas.height);
+
+      stars.forEach(s => { s.update(); s.draw(); });
+
+      if (Math.random() < 0.04 && shootingStars.length < 3) shootingStars.push(new ShootingStar());
+      shootingStars = shootingStars.filter(s => {
+        s.update();
+        s.draw();
+        return s.opacity > 0;
+      });
+
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
+</body>
+</html>

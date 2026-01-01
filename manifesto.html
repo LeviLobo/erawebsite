@@ -11,17 +11,15 @@
       to { opacity: 1; transform: translateY(0); }
     }
     @keyframes glitch {
-      0%   { text-shadow: 1px 0 #D4A576, -1px 0 #F5F5F5; }
-      50%  { text-shadow: -1px 0 #D4A576, 1px 0 #F5F5F5; }
+      0% { text-shadow: 1px 0 #D4A576, -1px 0 #F5F5F5; }
+      50% { text-shadow: -1px 0 #D4A576, 1px 0 #F5F5F5; }
       100% { text-shadow: 1px 0 #D4A576, -1px 0 #F5F5F5; }
     }
     @keyframes pulse {
       0%, 100% { text-shadow: 0 0 4px #D4A576; }
-      50%      { text-shadow: 0 0 12px #D4A576, 0 0 24px #B89B72; }
+      50% { text-shadow: 0 0 12px #D4A576, 0 0 24px #B89B72; }
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body {
       margin: 0;
       padding: 80px 20px 120px;
@@ -32,14 +30,12 @@
       min-height: 100vh;
       overflow-x: hidden;
     }
-
     canvas {
       position: fixed;
       top: 0; left: 0;
       z-index: 1;
       pointer-events: none;
     }
-
     .manifesto {
       position: relative;
       z-index: 2;
@@ -54,7 +50,6 @@
       text-align: center;
       animation: fadeIn 1.5s ease-out;
     }
-
     h1 {
       font-size: clamp(2.8rem, 10vw, 5.5rem);
       font-weight: 700;
@@ -64,33 +59,28 @@
       text-transform: uppercase;
       animation: glitch 4s infinite alternate, pulse 6s infinite ease-in-out;
     }
-
     .text {
       font-size: clamp(1.15rem, 3.8vw, 1.65rem);
       line-height: 2;
       max-width: 780px;
       margin: 0 auto 40px;
     }
-
     .text p {
       margin: 36px auto;
       opacity: 0;
       animation: fadeIn 1.2s ease-out forwards;
     }
-
     /* Staggered fade-in */
     .text p:nth-child(1) { animation-delay: 0.4s; }
     .text p:nth-child(2) { animation-delay: 0.9s; }
     .text p:nth-child(3) { animation-delay: 1.4s; }
     .text p:nth-child(4) { animation-delay: 1.9s; }
     .text p:nth-child(5) { animation-delay: 2.4s; }
-
     strong {
       color: #D4A576;
       font-weight: 700;
       letter-spacing: 2px;
     }
-
     em {
       color: #F5F5F5;
       font-style: normal;
@@ -99,7 +89,21 @@
       margin: 40px auto;
       font-size: 1.1em;
     }
-
+    .legal {
+      font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+      line-height: 1.6;
+      max-width: 780px;
+      margin: 60px auto 0;
+      padding-top: 40px;
+      border-top: 1px solid rgba(212,165,118,0.2);
+      opacity: 0;
+      animation: fadeIn 1.2s ease-out forwards;
+      animation-delay: 2.9s;
+    }
+    .legal p {
+      margin: 20px auto;
+      color: #D3D3D3;
+    }
     footer {
       position: fixed;
       bottom: 30px;
@@ -110,59 +114,51 @@
       letter-spacing: 1.5px;
       z-index: 3;
     }
-
     @media (max-width: 640px) {
       .manifesto { padding: 50px 25px; }
       h1 { margin-bottom: 40px; }
       .text p { margin: 28px auto; }
+      .legal { margin-top: 40px; padding-top: 30px; }
     }
   </style>
 </head>
 <body>
-
   <canvas id="starCanvas"></canvas>
-
   <div class="manifesto">
     <h1>ERA RECORDING ARCHIVE</h1>
-
     <div class="text">
       <p><strong>E</strong> – Era. Founded in 2019, we began in the raw, trembling hinge between a dying world and whatever wild thing comes next.</p>
-
       <p><strong>R</strong> – Recording. From that first fracture we have seized the unfiltered human stories: every cracked voice, every defiant heartbeat, every whisper that refused the dark.</p>
-
       <p><strong>A</strong> – Archive. We swear, with every future breath and fire we can steal, to carry these sparks across every night that tries to swallow them, refusing surrender, refusing silence.</p>
-
       <p>Like Dylan Thomas said,<br>
         <em>Do not go gentle into that good night.<br>
         Rage, rage against the dying of the light.</em>
       </p>
-
       <p>With that same fury we fight to keep the spark of humanity alive.<br>
         Forever.<br>
         ERA is that fight.<br>
         Born in 2019.<br>
         Never over.</p>
     </div>
+    <div class="legal">
+      <p>ERA is a legally formed corporation in the State of Delaware, positioned to offer shares in the company to accredited investors. This structure enables strategic partnerships and investments that align with our mission to produce bold, auteur-driven films and multichannel content, while championing sustainability, inclusivity, and integrity.</p>
+      <p>For investment inquiries or more information on opportunities for accredited investors, please contact our team at info@eracinema.com with Investor in the subject line for more info.</p>
+    </div>
   </div>
-
   <footer>© ERA 2019–∞</footer>
-
   <!-- Same starfield you love (slightly optimized) -->
   <script>
     const canvas = document.getElementById('starCanvas');
     const ctx = canvas.getContext('2d');
     let w = canvas.width = window.innerWidth;
     let h = canvas.height = window.innerHeight;
-
     window.addEventListener('resize', () => {
       w = canvas.width = window.innerWidth;
       h = canvas.height = window.innerHeight;
     });
-
     const stars = [];
     const shooting = [];
     const palette = ['#F5F5FF', '#FFF5F5', '#FFFFF0', '#F0FFFF'];
-
     class Star {
       constructor() {
         this.reset();
@@ -183,18 +179,14 @@
         ctx.fill();
       }
     }
-
     for (let i = 0; i < 120; i++) stars.push(new Star());
-
     function animate() {
       ctx.fillStyle = 'rgba(0,0,0,0.07)';
       ctx.fillRect(0, 0, w, h);
-
       stars.forEach(s => {
         s.opacity = 0.4 + Math.sin(Date.now() * 0.001 + s.x) * 0.4;
         s.draw();
       });
-
       if (Math.random() < 0.03 && shooting.length < 3) {
         shooting.push({
           x: Math.random() * w,
@@ -205,7 +197,6 @@
           opacity: 1
         });
       }
-
       shooting.forEach((s, i) => {
         s.x += s.vx;
         s.y += s.vy;
@@ -217,10 +208,10 @@
         ctx.fill();
         if (s.opacity <= 0) shooting.splice(i, 1);
       });
-
       requestAnimationFrame(animate);
     }
     animate();
   </script>
 </body>
 </html>
+```
